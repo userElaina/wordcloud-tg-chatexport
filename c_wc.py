@@ -1,11 +1,8 @@
 import string
 import numpy as np
-import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from c_pub import pub_names, stop_words
 from c_priv import priv_names
-
-
 
 with open('cleaned.data', 'r', encoding='utf-8') as file:
     text = file.read()
@@ -27,7 +24,6 @@ def color_func(word, font_size, position, orientation, random_state=None, **kwar
     if any([s in string.printable for s in word]):
         return np.random.choice([
             'rgb(128, 219, 214)',
-            # 'rgb(228, 119, 114)',
             'rgb(128, 219, 114)',
             'rgb(228, 219, 114)'
         ])
