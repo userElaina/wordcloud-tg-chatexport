@@ -12,7 +12,7 @@ quot_pattern = re.compile(r'&[^;]*;')
 _spoiler = '<span class="spoiler hidden" onclick="ShowSpoiler(this)">'
 _spoiler += '<span aria-hidden="true">'
 
-l = list()
+_l = list()
 check_html = list()
 check_quot = list()
 
@@ -24,7 +24,7 @@ for i in pattern.findall(s):
     i = i.replace('<u>', '').replace('</u>', '')  # underline
     i = i.replace('<s>', '"').replace('</s>', '"')  # del
     i = i.replace('<blockquote>', '"').replace('</blockquote>', '"')  # quote
-    i = i.replace('<pre>', '"').replace('</pre>', '"') # ``
+    i = i.replace('<pre>', '"').replace('</pre>', '"')  # ``
     i = i.replace('<code>', ' ').replace('</code>', ' ')  # code
     i = i.replace(_spoiler, '"').replace('</span></span>', '"')  # spoiler
     i = tag_pattern.sub(' ', i)
@@ -38,8 +38,10 @@ for i in pattern.findall(s):
     i = i.replace('？', '? ').replace('！', '! ').replace('：', ': ')
     i = i.replace('；', '; ').replace('“', '"').replace('”', '"')
     i = i.replace('‘', "'").replace('’', "'").replace('…', '...')
-    i = i.replace('（', '(').replace('）', ')').replace('【', '[').replace('】', ']')
-    i = i.replace('《', '<').replace('》', '>').replace('—', '-').replace('～', '~')
+    i = i.replace('（', '(').replace('）', ')')
+    i = i.replace('【', '[').replace('】', ']')
+    i = i.replace('《', '<').replace('》', '>')
+    i = i.replace('—', '-').replace('～', '~')
 
     i = i.replace('\n', ' ').replace('\t', ' ')
     i = i.strip()
@@ -53,7 +55,7 @@ for i in pattern.findall(s):
     i = i.replace('       ', ' ').replace('      ', ' ').replace('     ', ' ')
     i = i.replace('    ', ' ').replace('   ', ' ').replace('  ', ' ')
     if i:
-        l.append(i)
+        _l.append(i)
     check_html += html_pattern.findall(i)
     check_quot += quot_pattern.findall(i)
 
@@ -62,4 +64,4 @@ for i in pattern.findall(s):
 print(check_html)
 print(check_quot)
 
-open('cleaned.data', 'w', encoding='utf8').write('\n'.join(l))
+open('cleaned.data', 'w', encoding='utf8').write('\n'.join(_l))

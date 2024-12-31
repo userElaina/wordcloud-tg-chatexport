@@ -5,11 +5,12 @@ with open('cleaned.data', 'r', encoding='utf-8') as file:
 
 words = jieba.cut(text, cut_all=False)
 
-l = list()
-for i in words:
-    l.append(i)
+_l = list()
 
-s = ' '.join(l)
+for i in words:
+    _l.append(i)
+
+s = ' '.join(_l)
 
 # open('words.data', 'w', encoding='utf-8').write(s)
-open('wordset.data', 'w', encoding='utf-8').write(' '.join(sorted(set(l))))
+open('wordset.data', 'w', encoding='utf-8').write(' '.join(sorted(set(_l))))

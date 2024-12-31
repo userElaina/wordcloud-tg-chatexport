@@ -1,4 +1,5 @@
-from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
+from transformers import AutoModelForTokenClassification, AutoTokenizer
+from transformers import pipeline
 
 s = open('cleaned.data', 'r', encoding='utf-8').read().strip().split('\n')
 ss = list()
@@ -24,7 +25,10 @@ nlp = pipeline(
 names = list()
 for i in ss:
     ner_results = nlp(i)
-    name = [entity['word'] for entity in ner_results if entity['entity_group'] == 'name']
+    name = [
+        entity['word']
+        for entity in ner_results if entity['entity_group'] == 'name'
+    ]
     names += name
 
 names = list(set([i.replace(' ', '') for i in names]))

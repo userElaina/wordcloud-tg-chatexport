@@ -18,7 +18,13 @@ text = text.replace(' \n', '\n').replace('\n ', '\n')
 stop_words += priv_names
 stop_words += list(string.ascii_lowercase)
 
-def color_func(word, font_size, position, orientation, random_state=None, **kwargs):
+
+def color_func(
+    word,
+    font_size, position, orientation,
+    random_state=None,
+    **kwargs
+):
     if word in pub_names:
         return 'rgb(228, 119, 214)'
     if any([s in string.printable for s in word]):
@@ -28,6 +34,7 @@ def color_func(word, font_size, position, orientation, random_state=None, **kwar
             'rgb(228, 219, 114)'
         ])
     return 'rgb(128, 119, 214)'
+
 
 wc = WordCloud(
     font_path='LXGWNeoXiHei.ttf',
